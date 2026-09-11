@@ -16,10 +16,10 @@ import br.com.aweb.sistema_de_vendas.model.Cliente;
 import br.com.aweb.sistema_de_vendas.service.ClienteService;
 import jakarta.validation.Valid;
 
-@Controller 
+@Controller
 @RequestMapping("/clientes")
 public class ClienteController {
-    
+
     private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
@@ -51,9 +51,9 @@ public class ClienteController {
     // Formulário de edição
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable Long id) {
-        var optionalProduto = clienteService.buscarPorId(id);
-        if (optionalProduto.isPresent()) {
-            return new ModelAndView("cliente/form", Map.of("cliente", optionalProduto.get()));
+        var optionalCliente = clienteService.buscarPorId(id);
+        if (optionalCliente.isPresent()) {
+            return new ModelAndView("cliente/form", Map.of("cliente", optionalCliente.get()));
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
@@ -73,9 +73,9 @@ public class ClienteController {
     // Excluir cliente
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable Long id) {
-        var optionalProduto = clienteService.buscarPorId(id);
-        if (optionalProduto.isPresent()) {
-            return new ModelAndView("cliente/delete", Map.of("cliente", optionalProduto.get()));
+        var optionalCliente = clienteService.buscarPorId(id);
+        if (optionalCliente.isPresent()) {
+            return new ModelAndView("cliente/delete", Map.of("cliente", optionalCliente.get()));
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
@@ -86,6 +86,4 @@ public class ClienteController {
         return "redirect:/clientes";
     }
 
-
 }
-
