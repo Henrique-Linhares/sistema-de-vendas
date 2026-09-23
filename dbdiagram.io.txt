@@ -1,0 +1,40 @@
+Table clientes {
+  id integer [primary key]
+  nome varchar(100) [not null]
+  email varchar(100) [not null, unique]
+  cpf varchar(11) [not null, unique]
+  telefone varchar(20) [not null]
+  logradouro varchar(100) [not null]
+  numero varchar(10)
+  complemento varchar(50)
+  bairro varchar(50) [not null]
+  cidade varchar(50) [not null]
+  uf char(2) [not null]
+  cep varchar(10) [not null]
+}
+
+Table produtos {
+  id integer [primary key]
+  nome varchar(100) [not null]
+  descricao varchar(255) [not null]
+  preco decimal(10,2) [not null]
+  quantidade_em_estoque integer [not null]
+  version integer
+}
+
+Table pedidos {
+  id integer [primary key]
+  cliente_id integer [not null, ref: > clientes.id]
+  data_pedido timestamp [not null]
+  valor_total decimal(10,2) [not null]
+  status varchar(10) [not null]
+  version integer
+}
+
+Table itens_pedido {
+  id integer [primary key]
+  pedido_id integer [not null, ref: > pedidos.id]
+  produto_id integer [not null, ref: > produtos.id]
+  quantidade integer [not null]
+  preco_unitario decimal(10,2) [not null]
+}

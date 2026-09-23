@@ -13,33 +13,29 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>Nome Completo</th>
-            <th>Email</th>
+            <th>Nome</th>
+            <th>E-mail</th>
             <th>CPF</th>
             <th>Telefone</th>
-            <th>Logradouro</th>
-            <th>Número</th>
-            <th>Complemento</th>
-            <th>CEP</th>
-            <th>Bairro</th>
-            <th>Cidade</th>
-            <th>UF</th>
+            <th>Endereço</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="cliente : ${clientes}">
-            <td th:text="${cliente.nomeCompleto}"></td>
+            <td th:text="${cliente.nome}"></td>
             <td th:text="${cliente.email}"></td>
             <td th:text="${cliente.cpf}"></td>
             <td th:text="${cliente.telefone}"></td>
-            <td th:text="${cliente.logradouro}"></td>
-            <td th:text="${cliente.numero}"></td>
-            <td th:text="${cliente.complemento}"></td>
-            <td th:text="${cliente.cep}"></td>
-            <td th:text="${cliente.bairro}"></td>
-            <td th:text="${cliente.cidade}"></td>
-            <td th:text="${cliente.uf}"></td>
+            <td>
+                <span th:text="${cliente.logradouro}"></span>,
+                <span th:text="${cliente.numero}"></span>
+                <span th:text="${cliente.complemento}"></span> -
+                <span th:text="${cliente.bairro}"></span>,
+                <span th:text="${cliente.cidade}"></span> -
+                <span th:text="${cliente.uf}"></span>,
+                CEP: <span th:text="${cliente.cep}"></span>
+            </td>
             <td>
                 <a class="btn btn-sm btn-warning" th:href="@{/clientes/edit/{id}(id=${cliente.id})}">Editar</a>
                 <a class="btn btn-sm btn-danger" th:href="@{/clientes/delete/{id}(id=${cliente.id})}">Excluir</a>

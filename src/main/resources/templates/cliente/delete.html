@@ -15,11 +15,11 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>Nome Completo</th>
-            <td th:text="${cliente.nomeCompleto}"></td>
+            <th>Nome</th>
+            <td th:text="${cliente.nome}"></td>
         </tr>
         <tr>
-            <th>Email</th>
+            <th>E-mail</th>
             <td th:text="${cliente.email}"></td>
         </tr>
         <tr>
@@ -27,35 +27,20 @@
             <td th:text="${cliente.cpf}"></td>
         </tr>
         <tr>
-            <th>CEP</th>
-            <td th:text="${cliente.cep}"></td>
+            <th>Telefone</th>
+            <td th:text="${cliente.telefone}"></td>
         </tr>
         <tr>
-            <th>Logradouro</th>
-            <td th:text="${cliente.logradouro}"></td>
-        </tr> 
-        <tr>
-            <th>Número</th>
-            <td th:text="${cliente.numero}"></td>
-        </tr> 
-        <tr>
-            <th>Complemento</th>
-            <td th:text="${cliente.complemento}"></td>
-        </tr>
-
-         <tr>
-            <th>Bairro</th>
-            <td th:text="${cliente.bairro}"></td>
-        </tr>
-
-         <tr>
-            <th>Cidade</th>
-            <td th:text="${cliente.cidade}"></td>
-        </tr>
-
-        <tr>
-            <th>UF</th>
-            <td th:text="${cliente.uf}"></td>
+            <th>Endereço</th>
+            <td>
+                <span th:text="${cliente.logradouro}"></span>,
+                <span th:text="${cliente.numero}"></span>
+                <span th:text="${cliente.complemento}"></span> -
+                <span th:text="${cliente.bairro}"></span>,
+                <span th:text="${cliente.cidade}"></span> -
+                <span th:text="${cliente.uf}"></span>,
+                CEP: <span th:text="${cliente.cep}"></span>
+            </td>
         </tr>
     </table>
 

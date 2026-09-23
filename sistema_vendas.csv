@@ -1,0 +1,86 @@
+List Name,Card Name,Description
+Infraestrutura,Banco de Dados PostgreSQL em Docker,"Banco rodando em container Docker. Criar usuário, senha e banco sistema_vendas. Persistência via volumes."
+Infraestrutura,Estrutura Spring Boot MVC,"Aplicação monolítica seguindo MVC: entity, repository, service, controller. Views com Thymeleaf e arquivos estáticos em resources/static."
+Infraestrutura,Frontend com Bootstrap,"Interfaces responsivas usando Bootstrap: tabelas, formulários, alertas e cards."
+Infraestrutura,Aplicação Spring Boot em Docker,"Containerizar aplicação Spring Boot. Configurar Dockerfile e docker-compose integrando app + banco."
+
+Cliente,Cadastro de Clientes,"Formulário HTML usando Thymeleaf para cadastro de clientes. Campos obrigatórios:
+- Nome completo
+- E-mail (válido e único)
+- CPF (válido e único)
+- Telefone
+- Endereço completo:
+  - Logradouro
+  - Número (opcional)
+  - Complemento (opcional)
+  - Bairro
+  - Cidade
+  - UF
+  - CEP"
+Cliente,Alteração de Clientes,"Atualizar dados de clientes via formulário HTML, mantendo validações de campos obrigatórios e unicidade:
+- Nome completo
+- E-mail
+- CPF
+- Telefone
+- Endereço completo"
+Cliente,Listagem de Clientes,"Exibir todos os clientes em tabela HTML com Bootstrap. Mostrar:
+- Nome completo
+- E-mail
+- CPF
+- Telefone
+- Endereço completo"
+Cliente,Exclusão de Clientes,"Permitir excluir clientes via interface HTML, com confirmação antes da remoção."
+
+Produto,Cadastro de Produtos,"Formulário HTML via Thymeleaf para cadastro de produtos. Campos obrigatórios:
+- Nome do produto
+- Descrição
+- Preço (maior que zero)
+- Quantidade em estoque (não negativa)
+- ID gerado automaticamente"
+Produto,Alteração de Produtos,"Atualizar produtos existentes via formulário HTML, mantendo validações:
+- Nome do produto
+- Descrição
+- Preço
+- Quantidade em estoque"
+Produto,Listagem de Produtos,"Exibir todos os produtos em tabela HTML com Bootstrap. Mostrar:
+- Nome do produto
+- Descrição
+- Preço
+- Quantidade em estoque"
+Produto,Exclusão de Produtos,"Permitir excluir produtos via interface HTML, com confirmação."
+
+Pedido,Registro de Pedidos,"Formulário HTML para criar pedidos. Campos obrigatórios:
+- Cliente (seleção)
+- Lista de produtos (mínimo 1)
+- Quantidade de cada produto (respeitando estoque)
+- Data e hora do pedido (calculada automaticamente)
+- Valor total (calculado automaticamente)
+- Status: Ativo"
+Pedido,Atualização de Pedidos,"Alterar pedidos não finalizados:
+- Adicionar/remover produtos
+- Alterar quantidades
+- Recalcular valor total"
+Pedido,Cancelamento de Pedidos,"Cancelar pedidos:
+- Alterar status para Cancelado
+- Devolver produtos ao estoque
+- Registro não deve ser excluído"
+Pedido,Listagem de Pedidos,"Exibir todos os pedidos em tabela HTML com Bootstrap. Mostrar:
+- Cliente
+- Produtos
+- Quantidades
+- Valor total
+- Data/hora
+- Status"
+
+Usuário (Login),Cadastro de Usuários,"Formulário HTML para criar usuários. Campos obrigatórios:
+- Nome de usuário (único)
+- Senha (criptografada)
+- Perfil de acesso (Administrador ou Usuário comum)"
+Usuário (Login),Autenticação de Usuário,"Tela de login HTML:
+- Usuário
+- Senha
+- Criação de sessão após validação
+- Logout"
+Usuário (Login),Controle de Permissões,"Controlar acesso baseado no perfil do usuário:
+- Administrador: acesso completo
+- Usuário comum: acesso restrito a vendas e consultas"
