@@ -6,79 +6,102 @@
     <title th:if="${cliente.id == null}">Cadastro de Cliente</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
-<body>
-<div class="container mt-5">
-    <h2 th:text="${cliente.id == null} ? 'Novo Cliente' : 'Editar Cliente'"></h2>
-    <form th:action="@{${cliente.id == null} ? '/clientes/novo' : '/clientes/edit/' + ${cliente.id}}" th:object="${cliente}" method="post">
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome completo</label>
-            <input type="text" class="form-control" id="nome" th:field="*{nomeCompleto}">
-            <div class="text-danger" th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}"></div>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="#">Sistema de Vendas</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/clientes}">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/produtos}">Produtos</a></li>
+            </ul>
         </div>
+    </div>
+</nav>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}">
-            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <h4 class="mb-0 text-dark" th:text="${cliente.id == null} ? 'Novo Cliente' : 'Editar Cliente'"></h4>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{${cliente.id == null} ? '/clientes/novo' : '/clientes/edit/' + ${cliente.id}}" th:object="${cliente}" method="post">
+                        
+                        <h5 class="mb-3 text-secondary">Dados Pessoais</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-12">
+                                <label for="nome" class="form-label">Nome completo</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('nomeCompleto')} ? 'is-invalid' : ''" id="nome" th:field="*{nomeCompleto}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''" id="email" th:field="*{email}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid' : ''" id="cpf" th:field="*{cpf}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid' : ''" id="telefone" th:field="*{telefone}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3 text-secondary border-top pt-3">Endereço</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-8">
+                                <label for="logradouro" class="form-label">Logradouro</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('endereco.logradouro')} ? 'is-invalid' : ''" id="logradouro" th:field="*{endereco.logradouro}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('endereco.logradouro')}" th:errors="*{endereco.logradouro}"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="numero" class="form-label">Número</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('endereco.numero')} ? 'is-invalid' : ''" id="numero" th:field="*{endereco.numero}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('endereco.numero')}" th:errors="*{endereco.numero}"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="complemento" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('endereco.complemento')} ? 'is-invalid' : ''" id="complemento" th:field="*{endereco.complemento}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('endereco.complemento')}" th:errors="*{endereco.complemento}"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="bairro" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('endereco.bairro')} ? 'is-invalid' : ''" id="bairro" th:field="*{endereco.bairro}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('endereco.bairro')}" th:errors="*{endereco.bairro}"></div>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('endereco.cidade')} ? 'is-invalid' : ''" id="cidade" th:field="*{endereco.cidade}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('endereco.cidade')}" th:errors="*{endereco.cidade}"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="uf" class="form-label">UF</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('endereco.uf')} ? 'is-invalid' : ''" id="uf" th:field="*{endereco.uf}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('endereco.uf')}" th:errors="*{endereco.uf}"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cep" class="form-label">CEP</label>
+                                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('endereco.cep')} ? 'is-invalid' : ''" id="cep" th:field="*{endereco.cep}">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('endereco.cep')}" th:errors="*{endereco.cep}"></div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 border-top pt-3">
+                            <a th:href="@{/clientes}" class="btn btn-light border">Cancelar</a>
+                            <button type="submit" class="btn btn-primary px-4">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="mb-3">
-            <label for="cpf" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="cpf" th:field="*{cpf}">
-            <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
-        </div>
-
-        <div class="mb-3">
-            <label for="telefone" class="form-label">Telefone</label>
-            <input type="text" class="form-control" id="telefone" th:field="*{telefone}">
-            <div class="text-danger" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
-        </div>
-
-        <h5>Endereço</h5>
-
-        <div class="mb-3">
-            <label for="logradouro" class="form-label">Logradouro</label>
-            <input type="text" class="form-control" id="logradouro" th:field="*{endereco.logradouro}">
-            <div class="text-danger" th:if="${#fields.hasErrors('endereco.logradouro')}" th:errors="*{endereco.logradouro}"></div>
-        </div>
-
-        <div class="mb-3">
-            <label for="numero" class="form-label">Número</label>
-            <input type="text" class="form-control" id="numero" th:field="*{endereco.numero}">
-        </div>
-
-        <div class="mb-3">
-            <label for="complemento" class="form-label">Complemento</label>
-            <input type="text" class="form-control" id="complemento" th:field="*{endereco.complemento}">
-        </div>
-
-        <div class="mb-3">
-            <label for="bairro" class="form-label">Bairro</label>
-            <input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}">
-            <div class="text-danger" th:if="${#fields.hasErrors('endereco.bairro')}" th:errors="*{endereco.bairro}"></div>
-        </div>
-
-        <div class="mb-3">
-            <label for="cidade" class="form-label">Cidade</label>
-            <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}">
-            <div class="text-danger" th:if="${#fields.hasErrors('endereco.cidade')}" th:errors="*{endereco.cidade}"></div>
-        </div>
-
-        <div class="mb-3">
-            <label for="uf" class="form-label">UF</label>
-            <input type="text" class="form-control" id="uf" th:field="*{endereco.uf}">
-            <div class="text-danger" th:if="${#fields.hasErrors('endereco.uf')}" th:errors="*{endereco.uf}"></div>
-        </div>
-
-        <div class="mb-3">
-            <label for="cep" class="form-label">CEP</label>
-            <input type="text" class="form-control" id="cep" th:field="*{endereco.cep}">
-            <div class="text-danger" th:if="${#fields.hasErrors('endereco.cep')}" th:errors="*{endereco.cep}"></div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a th:href="@{/clientes}" class="btn btn-secondary">Cancelar</a>
-    </form>
+    </div>
 </div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -5,44 +5,69 @@
     <title>Listagem de Clientes</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
-<body>
-<div class="container mt-4">
-    <h1>Clientes</h1>
-    <a class="btn btn-primary mb-3" th:href="@{/clientes/novo}">Novo Cliente</a>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="#">Sistema de Vendas</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/clientes}">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/produtos}">Produtos</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>CPF</th>
-            <th>Telefone</th>
-            <th>Endereço</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cliente : ${clientes}">
-            <td th:text="${cliente.nomeCompleto}"></td>
-            <td th:text="${cliente.email}"></td>
-            <td th:text="${cliente.cpf}"></td>
-            <td th:text="${cliente.telefone}"></td>
-            <td>
-                <span th:text="${cliente.endereco.logradouro}"></span>,
-                <span th:text="${cliente.endereco.numero}"></span>
-                <span th:text="${cliente.endereco.complemento}"></span> -
-                <span th:text="${cliente.endereco.bairro}"></span>,
-                <span th:text="${cliente.endereco.cidade}"></span> -
-                <span th:text="${cliente.endereco.uf}"></span>,
-                CEP: <span th:text="${cliente.endereco.cep}"></span>
-            </td>
-            <td>
-                <a class="btn btn-sm btn-warning" th:href="@{/clientes/edit/{id}(id=${cliente.id})}">Editar</a>
-                <a class="btn btn-sm btn-danger" th:href="@{/clientes/delete/{id}(id=${cliente.id})}">Excluir</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container mb-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h4 class="mb-0 text-dark">Clientes</h4>
+            <a class="btn btn-primary" th:href="@{/clientes/novo}">+ Novo Cliente</a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-3">Nome</th>
+                            <th>E-mail</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>Endereço</th>
+                            <th class="text-center pe-3">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cliente : ${clientes}">
+                            <td class="ps-3 fw-medium" th:text="${cliente.nomeCompleto}"></td>
+                            <td th:text="${cliente.email}"></td>
+                            <td th:text="${cliente.cpf}"></td>
+                            <td th:text="${cliente.telefone}"></td>
+                            <td>
+                                <small class="text-muted d-block">
+                                    <span th:text="${cliente.endereco.logradouro}"></span>,
+                                    <span th:text="${cliente.endereco.numero}"></span>
+                                    <span th:text="${cliente.endereco.complemento}"></span>
+                                </small>
+                                <small class="text-muted d-block">
+                                    <span th:text="${cliente.endereco.bairro}"></span>,
+                                    <span th:text="${cliente.endereco.cidade}"></span> -
+                                    <span th:text="${cliente.endereco.uf}"></span>
+                                </small>
+                            </td>
+                            <td class="text-center pe-3">
+                                <a class="btn btn-sm btn-outline-secondary me-1" th:href="@{/clientes/edit/{id}(id=${cliente.id})}">Editar</a>
+                                <a class="btn btn-sm btn-outline-danger" th:href="@{/clientes/delete/{id}(id=${cliente.id})}">Excluir</a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(clientes)}">
+                            <td colspan="6" class="text-center py-5 text-muted">Nenhum cliente encontrado.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

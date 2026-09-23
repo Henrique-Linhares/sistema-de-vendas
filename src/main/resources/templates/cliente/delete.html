@@ -5,49 +5,76 @@
     <title>Excluir Cliente</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
-<body>
-<div class="container mt-4">
-    <h1>Excluir Cliente</h1>
-
-    <div class="alert alert-danger">
-        <p>Tem certeza que deseja excluir o cliente <strong th:text="${cliente.nomeCompleto}"></strong>?</p>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="#">Sistema de Vendas</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/clientes}">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/produtos}">Produtos</a></li>
+            </ul>
+        </div>
     </div>
+</nav>
 
-    <table class="table table-bordered">
-        <tr>
-            <th>Nome</th>
-            <td th:text="${cliente.nomeCompleto}"></td>
-        </tr>
-        <tr>
-            <th>E-mail</th>
-            <td th:text="${cliente.email}"></td>
-        </tr>
-        <tr>
-            <th>CPF</th>
-            <td th:text="${cliente.cpf}"></td>
-        </tr>
-        <tr>
-            <th>Telefone</th>
-            <td th:text="${cliente.telefone}"></td>
-        </tr>
-        <tr>
-            <th>Endereço</th>
-            <td>
-                <span th:text="${cliente.endereco.logradouro}"></span>,
-                <span th:text="${cliente.endereco.numero}"></span>
-                <span th:text="${cliente.endereco.complemento}"></span> -
-                <span th:text="${cliente.endereco.bairro}"></span>,
-                <span th:text="${cliente.endereco.cidade}"></span> -
-                <span th:text="${cliente.endereco.uf}"></span>,
-                CEP: <span th:text="${cliente.endereco.cep}"></span>
-            </td>
-        </tr>
-    </table>
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card border-danger shadow-sm">
+                <div class="card-header bg-danger text-white py-3">
+                    <h5 class="mb-0">Confirmar Exclusão</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-warning mb-4">
+                        <p class="mb-0">Tem certeza que deseja excluir o cliente <strong th:text="${cliente.nomeCompleto}"></strong>? Esta ação não poderá ser desfeita.</p>
+                    </div>
 
-    <form th:action="@{/clientes/delete/{id}(id=${cliente.id})}" method="post">
-        <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
-        <a th:href="@{/clientes}" class="btn btn-secondary">Cancelar</a>
-    </form>
+                    <table class="table table-bordered mb-4">
+                        <tbody>
+                            <tr>
+                                <th class="w-25 bg-light">Nome</th>
+                                <td th:text="${cliente.nomeCompleto}"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">E-mail</th>
+                                <td th:text="${cliente.email}"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">CPF</th>
+                                <td th:text="${cliente.cpf}"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Telefone</th>
+                                <td th:text="${cliente.telefone}"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Endereço</th>
+                                <td>
+                                    <small>
+                                        <span th:text="${cliente.endereco.logradouro}"></span>,
+                                        <span th:text="${cliente.endereco.numero}"></span>
+                                        <span th:text="${cliente.endereco.complemento}"></span><br>
+                                        <span th:text="${cliente.endereco.bairro}"></span>,
+                                        <span th:text="${cliente.endereco.cidade}"></span> -
+                                        <span th:text="${cliente.endereco.uf}"></span><br>
+                                        CEP: <span th:text="${cliente.endereco.cep}"></span>
+                                    </small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <form th:action="@{/clientes/delete/{id}(id=${cliente.id})}" method="post">
+                        <div class="d-flex justify-content-end gap-2">
+                            <a th:href="@{/clientes}" class="btn btn-light border">Cancelar</a>
+                            <button type="submit" class="btn btn-danger px-4">Confirmar Exclusão</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
