@@ -9,6 +9,8 @@ import br.com.aweb.sistema_de_vendas.model.ItemPedido;
 import br.com.aweb.sistema_de_vendas.model.Pedido;
 import br.com.aweb.sistema_de_vendas.model.Produto;
 import br.com.aweb.sistema_de_vendas.model.enums.StatusPedido;
+import br.com.aweb.sistema_de_vendas.exception.EntidadeNaoEncontradaException;
+import br.com.aweb.sistema_de_vendas.exception.RegraNegocioException;
 import br.com.aweb.sistema_de_vendas.repository.PedidoRepository;
 import br.com.aweb.sistema_de_vendas.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
@@ -56,22 +58,22 @@ public class PedidoService {
         Optional<Produto> optionalProduto = produtoRepository.findById(produtoId);
 
         if (!optionalPedido.isPresent()) {
-            throw new IllegalArgumentException("Pedido não encontrado");
+            throw new EntidadeNaoEncontradaException("Pedido não encontrado");
         }
 
-        if (!optionalPedido.isPresent()) {
-            throw new IllegalArgumentException("Produto não encontrado");
+        if (!optionalProduto.isPresent()) {
+            throw new EntidadeNaoEncontradaException("Produto não encontrado");
         }
 
         Pedido pedido = optionalPedido.get();
         Produto produto = optionalProduto.get();
 
-        if (pedido.getStatus() != StatusPedido.CANCELADO) {
-            throw new IllegalStateException("Não é possível adicionar itens a um pedido cancelado");
+        if (pedido.getStatus() == StatusPedido.CANCELADO) {
+            throw new RegraNegocioException("Não é possível adicionar itens a um pedido cancelado");
         }
 
         if (produto.getQuantidadeEmEstoque() < quantidade) {
-            throw new IllegalStateException("Estoque insuficiente para o produto: " + produto.getNome());
+            throw new RegraNegocioException("Estoque insuficiente para o produto: " + produto.getNome());
         }
 
         ItemPedido item = new ItemPedido(produto, quantidade);
@@ -86,5 +88,7 @@ public class PedidoService {
         pedidoRepository.save(pedido);
         produtoRepository.save(produto);
     }
+
+    // REMOVER ITEM do pedido
 
 }
