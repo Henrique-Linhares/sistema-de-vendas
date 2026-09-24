@@ -20,8 +20,13 @@ public class ItemPedido {
 
     @NotNull(message = "O produto é obrigatório")
     @ManyToOne
-    @JoinColumn(name = "produto_id",nullable = false)
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
+
+    @NotNull(message = "O pedido é obrigatório")
+    @ManyToOne
+    @JoinColumn(name = "pedido_id", nullable = false)
+    private Pedido pedido;
 
     @NotNull(message = "Quantidade é obrigatória")
     private Integer quantidade;
