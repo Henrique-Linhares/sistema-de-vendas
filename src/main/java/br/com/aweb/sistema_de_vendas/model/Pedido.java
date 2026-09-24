@@ -26,9 +26,8 @@ public class Pedido {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @NotNull(message = "A data do pedido é obrigatória")
     @Column(nullable = false, name = "data_pedido")
-    private LocalDateTime dataPedido;
+    private LocalDateTime dataPedido = LocalDateTime.now();
 
     @NotNull(message = "O valor total do pedido é obrigatório")
     @Column(nullable = false, name = "valor_total")
@@ -40,7 +39,7 @@ public class Pedido {
 
     @NotNull(message = "Cliente é obrigatório")
     @ManyToOne
-    @JoinColumn(name = "cliente_id",nullable = false)
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
